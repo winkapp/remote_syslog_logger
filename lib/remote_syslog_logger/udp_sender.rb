@@ -26,7 +26,7 @@ module RemoteSyslogLogger
           next if line =~ /^\s*$/
           packet = @packet.dup
           packet.content = line
-          @socket.send("#{packet.assemble}\n", 0, @remote_hostname, @remote_port)
+          @socket.send(packet.assemble, 0, @remote_hostname, @remote_port)
         rescue
           $stderr.puts "#{self.class} error: #{$!.class}: #{$!}\nOriginal message: #{line}"
           raise if @whinyerrors
